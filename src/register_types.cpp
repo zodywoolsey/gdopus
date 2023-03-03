@@ -14,7 +14,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    ClassDB::register_class<GDExample>();
+    ClassDB::register_class<test>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
