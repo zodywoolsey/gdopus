@@ -17,7 +17,7 @@ private:
     float noiseScale;
     float snapScale;
     FastNoiseLite noise;
-    ArrayMesh amesh;
+    Mesh amesh;
     PackedVector3Array verts;
     PackedVector3Array normals;
     PackedVector3Array faceNormals;

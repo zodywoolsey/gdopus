@@ -8,12 +8,11 @@ void test::_bind_methods() {
 
 test::test() {
     // initialize any variables here
-    time_passed = 0.0;
     size = 200;
     cSeed = 0;
     noiseScale = 1;
     snapScale = .5;
-    amesh ;
+    amesh;
     verts = PackedVector3Array();
     normals = PackedVector3Array();
     faceNormals = PackedVector3Array();
@@ -29,14 +28,11 @@ void test::_ready(){
 }
 
 void test::_process(float delta) {
-    time_passed += delta;
-
-    Vector2 new_position = Vector2(10.0 + (10.0 * sin(time_passed * 2.0)), 10.0 + (10.0 * cos(time_passed * 1.5)));
-
+	
 }
 
 void test::generate(){
-    
+    // convert the following gdscript to c++
 	// verts = PackedVector3Array()
 	// amesh = ArrayMesh.new()
 	// var mult = .5
@@ -62,4 +58,7 @@ void test::generate(){
 	// 	ter.remove_child(child)
 	// ter.create_trimesh_collision()
 	// ter.find_child("CollisionShape3D").hide()
+	
+	PackedVector3Array verts = PackedVector3Array();
+	// set_mesh();
 }
