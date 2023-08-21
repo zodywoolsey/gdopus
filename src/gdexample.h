@@ -1,39 +1,26 @@
 #ifndef GDEXAMPLE_H
 #define GDEXAMPLE_H
+#define SUNVOX_MAIN
 
-#include <godot_cpp/classes/mesh_instance3d.hpp>
-#include <godot_cpp/classes/array_mesh.hpp>
-#include <godot_cpp/classes/fast_noise_lite.hpp>
+#include <godot_cpp/classes/sprite2d.hpp>
 
 namespace godot {
 
-class test : public MeshInstance3D{
-    GDCLASS(test, MeshInstance3D)
+class GDExample : public Sprite2D {
+    GDCLASS(GDExample, Sprite2D)
 
 private:
-    float time_passed;
-    int size;
-    int cSeed;
-    float noiseScale;
-    float snapScale;
-    FastNoiseLite noise;
-    Mesh amesh;
-    PackedVector3Array verts;
-    PackedVector3Array normals;
-    PackedVector3Array faceNormals;
-    float offset;
+    double time_passed;
 
 protected:
     static void _bind_methods();
 
 public:
-    test();
-    ~test();
+    GDExample();
+    ~GDExample();
 
+    void _process(double delta);
     void _ready();
-    void _process(float delta);
-    void generate();
-    void addQuad(Vector3 pos, float offset, float mult);
 };
 
 }

@@ -1,64 +1,64 @@
 #include "gdexample.h"
 #include <godot_cpp/core/class_db.hpp>
+#include <iostream>
+#include <windows.h>
+#include <thread>
+#include <chrono>
+#include "sunvox_lib-2.1c/sunvox_lib/headers/sunvox.h"
 
 using namespace godot;
 
-void test::_bind_methods() {
+int getOutput(int16_t* buf, int size){
+	int output = sv_audio_callback(buf, size, 0, sv_get_ticks());
+	return output;
 }
 
-test::test() {
-    // initialize any variables here
-    size = 200;
-    cSeed = 0;
-    noiseScale = 1;
-    snapScale = .5;
-    amesh;
-    verts = PackedVector3Array();
-    normals = PackedVector3Array();
-    faceNormals = PackedVector3Array();
-    offset = 0;
+void printBuffer(int16_t* buf, int size){
+	for(int i = 0; i < size; i++){
+		std::cout << buf[i];
+		std::cout << "\n";
+	}
+		std::cout << "\n";
+}
+void GDExample::_bind_methods() {
 }
 
-test::~test() {
-    // add your cleanup here
+GDExample::GDExample() {
+    // Initialize any variables here.
+    time_passed = 0.0;
 }
 
-void test::_ready(){
-    
+GDExample::~GDExample() {
+    // Add your cleanup here.
 }
 
-void test::_process(float delta) {
-	
+void GDExample::_ready() {
+	using namespace std::this_thread;
+	using namespace std::chrono;
+	if(sv_load_dll()) return;
+	std::cout<<"Load sunvox dll\n";
+	int flags = SV_INIT_FLAG_AUDIO_INT16 | SV_INIT_FLAG_USER_AUDIO_CALLBACK;
+	int ver = sv_init("",44100,2,0);
+	if(ver>=0)
+	{
+		sv_open_slot(0);
+		std::cout << "Opened a slot, ready to load a file/n";
+		sv_load(0, "C:/Users/zodie/Documents/github/gdextensiontest/gdextensiontest/bin/worst.sunvox");
+		sv_volume(0, 30);
+		sv_play(0);
+		int16_t* buf = new int16_t [512];
+		// for(int i = 0; i < 10000; i++){
+		// 	buf = new int16_t [512];
+		// 	getOutput(buf, 512);
+		// }
+		// printBuffer(buf, 512);
+		sleep_for(seconds(2));
+		sv_close_slot(0);
+		sv_deinit();
+		// std::cout << "Closed slot and deinitialized\n";
+	}
+	sv_unload_dll();
 }
 
-void test::generate(){
-    // convert the following gdscript to c++
-	// verts = PackedVector3Array()
-	// amesh = ArrayMesh.new()
-	// var mult = .5
-	// printf('test')
-	// for x in range(size):
-	// 	for z in range(size):
-	// 		var tmpx = x-(size/2)
-	// 		var tmpz = z-(size/2)
-	// 		var n = noise.get_noise_2d((tmpx+offset)*mult,(tmpz+offset)*mult)*noiseScale
-	// 		n = snapped(n, snapScale)
-	// 		addQuadPoint(Vector3(tmpx,n,tmpz),offset,mult)
-	// var meshArr = []
-	// meshArr.resize(Mesh.ARRAY_MAX)
-	// meshArr[Mesh.ARRAY_VERTEX] = verts
-	// meshArr[Mesh.ARRAY_NORMAL] = normals
-	
-	
-	// amesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,meshArr)
-	// amesh.lightmap_unwrap(Transform3D(),1.0)
-	// ter.mesh = amesh
-	// offset += 1
-	// for child in ter.get_children():
-	// 	ter.remove_child(child)
-	// ter.create_trimesh_collision()
-	// ter.find_child("CollisionShape3D").hide()
-	
-	PackedVector3Array verts = PackedVector3Array();
-	// set_mesh();
+void GDExample::_process(double delta) {
 }

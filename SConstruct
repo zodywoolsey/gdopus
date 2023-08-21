@@ -16,6 +16,13 @@ env = SConscript("godot-cpp/SConstruct")
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
+#link user32.h for MessageBoxA
+env.Append(LIBS=["user32"])
+
+# link sunvox library
+# env.Append(IMPLIBSUFFIX=".dll")
+# env.Append(LIBS=["src/sunvox_lib-2.1c/sunvox_lib/windows/lib_x86/sunvox.dll"])
+
 if env["platform"] == "macos":
     library = env.SharedLibrary(
         "gdextensiontest/bin/libgdexample.{}.{}.framework/libgdexample.{}.{}".format(
