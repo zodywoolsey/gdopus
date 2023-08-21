@@ -30,6 +30,9 @@ GDExample::GDExample() {
 
 GDExample::~GDExample() {
     // Add your cleanup here.
+	sv_close_slot(0);
+	sv_deinit();
+	sv_unload_dll();
 }
 
 void GDExample::_ready() {
@@ -43,7 +46,7 @@ void GDExample::_ready() {
 	{
 		sv_open_slot(0);
 		std::cout << "Opened a slot, ready to load a file/n";
-		sv_load(0, "C:/Users/zodie/Documents/github/gdextensiontest/gdextensiontest/bin/worst.sunvox");
+		sv_load(0, "bin/worst.sunvox");
 		sv_volume(0, 30);
 		sv_play(0);
 		int16_t* buf = new int16_t [512];
@@ -52,12 +55,11 @@ void GDExample::_ready() {
 		// 	getOutput(buf, 512);
 		// }
 		// printBuffer(buf, 512);
-		sleep_for(seconds(2));
-		sv_close_slot(0);
-		sv_deinit();
+		// sleep_for(seconds(2));
+		// sv_close_slot(0);
+		// sv_deinit();
 		// std::cout << "Closed slot and deinitialized\n";
 	}
-	sv_unload_dll();
 }
 
 void GDExample::_process(double delta) {

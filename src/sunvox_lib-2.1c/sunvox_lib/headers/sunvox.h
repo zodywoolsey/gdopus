@@ -837,11 +837,6 @@ SV_FN_DECL tsv_get_log sv_get_log SV_FN_DECL2;
 int sv_load_dll2( LIBNAME_STR_TYPE filename )
 {
 #ifdef OS_WIN
-   // get string for current directory then display it in message box
-   TCHAR buffer[MAX_PATH];
-   GetCurrentDirectory(MAX_PATH, buffer);
-   MessageBox(NULL, buffer, TEXT("Current Directory"), MB_OK);
-   
     g_sv_dll = LoadLibrary( filename );
     if( g_sv_dll == 0 ) 
     {
