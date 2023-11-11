@@ -32,10 +32,12 @@ func _process(delta):
 
 func go():
 	while true:
-		var delta:float = Time.get_unix_time_from_system()*1000.0-prevtime
-		prevtime = Time.get_unix_time_from_system()*1000.0
+		var delta:float = Time.get_ticks_usec()-prevtime
+		prevtime = Time.get_ticks_usec()
 		timer += delta
-		var encoded = effect.gdopus_encode()
-		var decoded = stream.gdopus_decode(encoded.output,encoded.encoded_bytes)
-		var rawbuffer = effect.get_buffer(960)
-		playbacker.push_buffer(decoded)
+		if timer > 2000.0:
+			timer = 0
+			var encoded = effect.gdopus_encode()
+			var decoded = stream.gdopus_decode(encoded.output,encoded.encoded_bytes)
+			var rawbuffer = effect.get_buffer(effect.get_frames_available())
+			playbacker.push_buffer(rawbuffer)
