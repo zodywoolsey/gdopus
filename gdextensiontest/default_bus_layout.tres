@@ -1,0 +1,31 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://d0sn8m1ge5i3v"]
+
+[sub_resource type="AudioEffectCapture" id="AudioEffectCapture_3b18q"]
+resource_name = "Capture"
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_rje48"]
+resource_name = "Amplify"
+volume_db = 11.95
+
+[sub_resource type="GDOpusEncoder" id="GDOpusEncoder_x13d5"]
+resource_name = "GDOpusEncoder"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectCapture_3b18q")
+bus/0/effect/0/enabled = true
+bus/1/name = &"mic sink"
+bus/1/solo = false
+bus/1/mute = true
+bus/1/bypass_fx = false
+bus/1/volume_db = 6.02
+bus/1/send = &"Master"
+bus/2/name = &"mic"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 6.02
+bus/2/send = &"mic sink"
+bus/2/effect/0/effect = SubResource("AudioEffectAmplify_rje48")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("GDOpusEncoder_x13d5")
+bus/2/effect/1/enabled = true

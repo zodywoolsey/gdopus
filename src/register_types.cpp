@@ -1,6 +1,7 @@
 #include "register_types.h"
 
-#include "gdexample.h"
+#include "gdopusencoder.h"
+#include "audiostreamopusdecoder.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -14,7 +15,8 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    ClassDB::register_class<GDExample>();
+    ClassDB::register_class<GDOpusEncoder>();
+    ClassDB::register_class<AudioStreamOpusDecoder>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

@@ -2,6 +2,10 @@
     "files.associations": {
         "cmath": "cpp",
         "thread": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "chrono": "cpp",
+        "test_opus_common.h": "c",
+        "opus_private.h": "c",
+        "opus.h": "c"
     }
 }

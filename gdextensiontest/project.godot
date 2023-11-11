@@ -10,10 +10,19 @@ config_version=5
 
 [application]
 
-config/name="gdextensiontest"
+config/name="gdopustest"
 run/main_scene="res://gd_example.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[audio]
+
+driver/enable_input=true
+driver/mix_rate=48000
+
+[autoload]
+
+BarkHelpers="*res://bark_helpers.gd"
 
 [rendering]
 

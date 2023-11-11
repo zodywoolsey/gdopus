@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://8xt3g6gxdry6"]
+
+[ext_resource type="Script" path="res://gd_example.gd" id="1_x0iaj"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mv7ls"]
+mix_rate = 44800.0
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_hr2t0"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_x0iaj")
+
+[node name="playback" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_mv7ls")
+
+[node name="mic" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_hr2t0")
+autoplay = true
+bus = &"mic"
