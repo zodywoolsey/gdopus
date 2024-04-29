@@ -3,7 +3,7 @@
 
 #include <godot_cpp/classes/audio_stream_generator.hpp>
 #include <godot_cpp/classes/audio_stream_generator_playback.hpp>
-#include "opus-1.4/include/opus.h"
+#include <opus/include/opus.h>
 
 namespace godot {
 

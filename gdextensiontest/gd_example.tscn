@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://gd_example.gd" id="1_x0iaj"]
 
 [sub_resource type="AudioStreamOpusDecoder" id="AudioStreamOpusDecoder_8jhlo"]
+resource_local_to_scene = false
+resource_name = ""
 mix_rate = 48000.0
 buffer_length = 0.02
 
@@ -20,4 +22,3 @@ autoplay = true
 stream = SubResource("AudioStreamMicrophone_hr2t0")
 volume_db = 24.0
 autoplay = true
-bus = &"mic"

@@ -1,9 +1,8 @@
 #ifndef GDOPUSENCODER_H
 #define GDOPUSENCODER_H
-#define SUNVOX_MAIN
 
 #include <godot_cpp/classes/audio_effect_capture.hpp>
-#include "opus-1.4/include/opus.h"
+#include <opus/include/opus.h>
 
 namespace godot {
 

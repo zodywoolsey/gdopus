@@ -1,6 +1,6 @@
 #include "audiostreamopusdecoder.h"
 #include <godot_cpp/core/class_db.hpp>
-#include "opus-1.4/include/opus.h"
+#include <opus/include/opus.h>
 
 using namespace godot;
 

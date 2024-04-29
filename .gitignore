@@ -195,3 +195,12 @@ compile_commands.json
 # Python development
 .venv
 venv
+
+*.a
+*.dylib
+*.la
+*.lai
+*.dll
+*.exp
+*.lib
+*.x86_64

@@ -13,13 +13,13 @@ env = SConscript("godot-cpp/SConstruct")
 # - LINKFLAGS are for linking flags
 
 # append all the external dependencies for opus to the include path
-env.Append(LIBPATH=["src/opus-1.4/win32/VS2015/x64/Debug/"])
-env.Append(LIBS=["opus"])
+env.Append(LIBPATH=["opus/.libs/","opus/src/.libs/"])
+env.Append(LIBS=["libopus","opus"])
 
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
-env.Append(CPPPATH=["src/"])
-sources = Glob("src/*.cpp")
+env.Append(CPPPATH=["./"])
+sources = Glob("*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(

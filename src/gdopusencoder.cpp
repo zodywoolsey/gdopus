@@ -1,10 +1,6 @@
 #include "gdopusencoder.h"
 #include <godot_cpp/core/class_db.hpp>
-#include <iostream>
-#include <windows.h>
-#include <thread>
-#include <chrono>
-#include "opus-1.4/include/opus.h"
+#include <opus/include/opus.h>
 
 using namespace godot;
 
