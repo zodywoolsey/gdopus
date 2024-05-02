@@ -27,3 +27,4 @@ BarkHelpers="*res://bark_helpers.gd"
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_s3tc_bptc=true

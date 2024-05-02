@@ -13,7 +13,6 @@ script = ExtResource("1_x0iaj")
 
 [node name="playback" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamOpusDecoder_8jhlo")
-volume_db = 24.0
 autoplay = true
 
 [node name="mic" type="AudioStreamPlayer" parent="."]

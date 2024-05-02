@@ -204,3 +204,6 @@ venv
 *.exp
 *.lib
 *.x86_64
+
+/gdextensiontest/exports/
+/gdextensiontest/export/

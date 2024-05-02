@@ -2,12 +2,12 @@
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_umdet"]
 resource_name = "Amplify"
-volume_db = -80.0
 
 [sub_resource type="GDOpusEncoder" id="GDOpusEncoder_w5ttv"]
 resource_name = "GDOpusEncoder"
 
 [resource]
+bus/0/volume_db = -21.0931
 bus/1/name = &"sink"
 bus/1/solo = false
 bus/1/mute = true
@@ -18,9 +18,9 @@ bus/2/name = &"input"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = 6.02
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectAmplify_umdet")
-bus/2/effect/0/enabled = true
+bus/2/effect/0/enabled = false
 bus/2/effect/1/effect = SubResource("GDOpusEncoder_w5ttv")
 bus/2/effect/1/enabled = true
