@@ -3,5 +3,5 @@
 	url = https://github.com/godotengine/godot-cpp
 	branch = master
 [submodule "opus"]
-	path = opus
+	path = src/opus
 	url = https://github.com/xiph/opus
