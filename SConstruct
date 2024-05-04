@@ -29,6 +29,7 @@ if env["platform"] == "macos":
         source=sources,
     )
 else:
+    env.Append(LIBS=["opus"])
     library = env.SharedLibrary(
         "gdextensiontest/bin/libgdopusencoder{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
