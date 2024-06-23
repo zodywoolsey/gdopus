@@ -30,6 +30,7 @@ offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+min_value = 2000.0
 max_value = 40000.0
 value = 5000.0
 
@@ -46,3 +47,45 @@ offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "bitrate: "
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = 28.0
+offset_right = 30.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "packet size:"
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 81.0
+offset_right = 47.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "loss packet"
+
+[node name="Button2" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 112.0
+offset_right = 47.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "no push"

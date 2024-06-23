@@ -13,8 +13,8 @@ env = SConscript("godot-cpp/SConstruct")
 # - LINKFLAGS are for linking flags
 
 # append all the external dependencies for opus to the include path
-env.Append(LIBPATH=["/opus/build"])
-# env.Append(LIBS=["opus"])
+env.Append(LIBPATH=["src/opus/build"])
+env.Append(LIBS=["opus"])
 
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.

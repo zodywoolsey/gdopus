@@ -16,6 +16,7 @@ void AudioStreamOpusDecoder::_bind_methods() {
 	// register static method "test"
 	ClassDB::bind_method(D_METHOD("gdopus_decode"), &AudioStreamOpusDecoder::gdopus_decode);
 	ClassDB::bind_method(D_METHOD("fast_push_buffer"), &AudioStreamOpusDecoder::fast_push_buffer);
+	ClassDB::bind_method(D_METHOD("gdopus_decode_loss"), &AudioStreamOpusDecoder::gdopus_decode_loss);
 }
 
 /**
@@ -67,6 +68,25 @@ PackedVector2Array AudioStreamOpusDecoder::gdopus_decode(PackedByteArray in_buff
 	// encode
 	opus_int32 decoded_samples = opus_decode_float(decoder, in_buffer_copy, in_encoded_bytes, output, FRAME_SIZE, 0);
 	delete in_buffer_copy;
+	// create a new PackedVector2Array and resize it to the size of the output buffer
+	PackedVector2Array packed_output = PackedVector2Array();
+	
+	// printf("output size: %d\n", sizeof(output));
+	
+	packed_output.resize(decoded_samples);
+	// print packed_output size
+	// unflatten the output buffer into the PackedVector2Array
+	for (int i = 0; i < decoded_samples; i++) {
+		packed_output[i] = Vector2(output[i*2],output[(i*2)+1]);
+	}
+	// print size of packed_output
+	// printf("size of decoded: %d\n", packed_output.size());
+	return packed_output;
+}
+
+PackedVector2Array AudioStreamOpusDecoder::gdopus_decode_loss(){
+	// decode from nothing oooooOOOOoooooo
+	opus_int32 decoded_samples = opus_decode_float(decoder, nullptr, 0, output, FRAME_SIZE, 0);
 	// create a new PackedVector2Array and resize it to the size of the output buffer
 	PackedVector2Array packed_output = PackedVector2Array();
 	
