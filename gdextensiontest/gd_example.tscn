@@ -4,7 +4,7 @@
 
 [sub_resource type="AudioStreamOpusDecoder" id="AudioStreamOpusDecoder_8jhlo"]
 mix_rate = 48000.0
-buffer_length = 0.02
+buffer_length = 0.1
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_hr2t0"]
 
@@ -13,9 +13,36 @@ script = ExtResource("1_x0iaj")
 
 [node name="playback" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamOpusDecoder_8jhlo")
+volume_db = 24.0
 autoplay = true
 
 [node name="mic" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMicrophone_hr2t0")
-volume_db = 24.0
 autoplay = true
+bus = &"input"
+
+[node name="HSlider" type="HSlider" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 40000.0
+value = 5000.0
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -51.0
+offset_right = 30.5
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "bitrate: "

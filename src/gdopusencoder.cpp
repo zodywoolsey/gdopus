@@ -1,6 +1,6 @@
 #include "gdopusencoder.h"
 #include <godot_cpp/core/class_db.hpp>
-#include <opus/include/opus.h>
+// #include <opus/include/opus.h>
 
 using namespace godot;
 
@@ -10,15 +10,19 @@ using namespace godot;
 void GDOpusEncoder::_bind_methods() {
 	// register static method "test"
 	ClassDB::bind_method(D_METHOD("gdopus_encode"), &GDOpusEncoder::gdopus_encode);
+	ClassDB::bind_method(D_METHOD("gdopus_set_bitrate"), &GDOpusEncoder::gdopus_set_bitrate);
 }
 
 GDOpusEncoder::GDOpusEncoder() {
     // Initialize any variables here.
 	output = new unsigned char[MAX_PACKET];
+	int err;
+	encoder = opus_encoder_create(48000, 2, OPUS_APPLICATION_VOIP, &err);
 }
 
 GDOpusEncoder::~GDOpusEncoder() {
     // Add your cleanup here.
+	opus_encoder_destroy(encoder);
 	delete output;
 }
 
@@ -26,7 +30,12 @@ void GDOpusEncoder::_ready() {
 	
 }
 
+void GDOpusEncoder::gdopus_set_bitrate(int bitrate){
+	opus_encoder_ctl(encoder, OPUS_SET_BITRATE(bitrate));
+}
+
 Dictionary GDOpusEncoder::gdopus_encode(){
+	// if(get_buffer_length_frames)
 	PackedVector2Array tmp = get_buffer(FRAME_SIZE);
 	float* interleaved = new float[tmp.size() * 2];
 	// flatten PackedVector2Array tmp to interleaved float*
@@ -36,7 +45,6 @@ Dictionary GDOpusEncoder::gdopus_encode(){
 	}
 	// instantiate encoder
 	int err;
-	OpusEncoder* encoder = opus_encoder_create(48000, 2, OPUS_APPLICATION_VOIP, &err);
 	// encode
 	opus_int32 encoded_bytes = opus_encode_float(encoder, interleaved, FRAME_SIZE, output, MAX_PACKET);
 	delete interleaved;

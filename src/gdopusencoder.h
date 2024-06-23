@@ -18,7 +18,9 @@ protected:
 public:
     GDOpusEncoder();
     ~GDOpusEncoder();
+    void gdopus_set_bitrate(int bitrate);
     Dictionary gdopus_encode();
+	OpusEncoder* encoder;
     unsigned char* output;
     void _process(double delta);
     void _ready();

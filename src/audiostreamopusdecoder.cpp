@@ -1,6 +1,6 @@
 #include "audiostreamopusdecoder.h"
 #include <godot_cpp/core/class_db.hpp>
-#include <opus/include/opus.h>
+// #include <opus/include/opus.h>
 
 using namespace godot;
 
@@ -25,6 +25,8 @@ void AudioStreamOpusDecoder::_bind_methods() {
 AudioStreamOpusDecoder::AudioStreamOpusDecoder() {
     // Initialize any variables here.
 	output = new float[MAX_PACKET];
+	int err;
+	decoder = opus_decoder_create(48000, 2, &err);
 }
 
 /**
@@ -36,6 +38,7 @@ AudioStreamOpusDecoder::AudioStreamOpusDecoder() {
 AudioStreamOpusDecoder::~AudioStreamOpusDecoder() {
     // Add your cleanup here.
 	delete output;
+	opus_decoder_destroy(decoder);
 }
 
 void AudioStreamOpusDecoder::_ready() {
@@ -59,9 +62,6 @@ PackedVector2Array AudioStreamOpusDecoder::gdopus_decode(PackedByteArray in_buff
 	for (int i = 0; i < in_buffer.size(); i++) {
 		in_buffer_copy[i] = in_buffer[i];
 	}
-	// instantiate encoder
-	int err;
-	OpusDecoder* decoder = opus_decoder_create(48000, 2, &err);
 	
 	
 	// encode

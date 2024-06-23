@@ -19,6 +19,7 @@ protected:
 public:
     AudioStreamOpusDecoder();
     ~AudioStreamOpusDecoder();
+    OpusDecoder* decoder;
     PackedVector2Array gdopus_decode(PackedByteArray in_buffer, int in_encoded_bytes);
     void fast_push_buffer(PackedVector2Array in_buffer, AudioStreamGeneratorPlayback* playback);
     float* output;
