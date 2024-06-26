@@ -12,10 +12,13 @@ env = SConscript("godot-cpp/SConstruct")
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
 
-# append all the external dependencies for opus to the include path
-env.Append(LIBPATH=["src/opus/build"])
+env.Append(LIBPATH=["src/opus/build/"])
 env.Append(LIBS=["opus"])
 
+# left over from testing web builds, leaving in case useful in the future
+# env.Append(CXXDEFINES=["EMCC_FORCE_STDLIBS=1"])
+# env.Append(CPPDEFINES=["EMCC_FORCE_STDLIBS=1"])
+# env.Append(CXXFLAGS=['-fstack-protector'])
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
@@ -29,7 +32,6 @@ if env["platform"] == "macos":
         source=sources,
     )
 else:
-    env.Append(LIBS=["opus"])
     library = env.SharedLibrary(
         "gdextensiontest/bin/libgdopusencoder{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,

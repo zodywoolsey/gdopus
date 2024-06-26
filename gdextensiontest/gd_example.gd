@@ -29,6 +29,7 @@ func _ready():
 	thread.start(go)
 	effect = AudioServer.get_bus_effect(2,1)
 	effect.gdopus_set_bitrate(2000)
+	#effect.gdopus_set_forward_error_correction(true)
 	h_slider.value = 2000
 	h_slider.value_changed.connect(func(value:float):
 		label.text = "bitrate: " +str(value)
@@ -52,16 +53,17 @@ func _process(delta):
 
 func go():
 	while true:
-		if effect.can_get_buffer(960):
+		if effect.can_get_buffer(960*2):
 			var encoded1 = effect.gdopus_encode()
-			#var encoded2 = effect.gdopus_encode()
+			var encoded2 = effect.gdopus_encode()
 			var decoded :PackedVector2Array
 			if !losing_packets:
 				decoded = stream.gdopus_decode(encoded1.output,encoded1.output.size())
+				decoded.append_array(stream.gdopus_decode(encoded2.output,encoded2.output.size()))
 			else:
 				decoded = stream.gdopus_decode_loss()
-			#decoded.append_array(stream.gdopus_decode(encoded2.output,encoded2.output.size()))
+				decoded += stream.gdopus_decode_loss()
 			packet_size = encoded1.output.size()
-			#packet_size += encoded2.output.size()
+			packet_size += encoded2.output.size()
 			if !nopush:
 				playbacker.push_buffer(decoded)

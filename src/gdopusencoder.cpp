@@ -11,6 +11,7 @@ void GDOpusEncoder::_bind_methods() {
 	// register static method "test"
 	ClassDB::bind_method(D_METHOD("gdopus_encode"), &GDOpusEncoder::gdopus_encode);
 	ClassDB::bind_method(D_METHOD("gdopus_set_bitrate"), &GDOpusEncoder::gdopus_set_bitrate);
+	ClassDB::bind_method(D_METHOD("gdopus_set_forward_error_correction"), &GDOpusEncoder::gdopus_set_forward_error_correction);
 }
 
 GDOpusEncoder::GDOpusEncoder() {
@@ -18,6 +19,8 @@ GDOpusEncoder::GDOpusEncoder() {
 	output = new unsigned char[MAX_PACKET];
 	int err;
 	encoder = opus_encoder_create(48000, 2, OPUS_APPLICATION_VOIP, &err);
+	// opus_encoder_ctl(encoder, OPUS_SET_INBAND_FEC(1));
+	// opus_encoder_ctl(encoder, OPUS_SET_PACKET_LOSS_PERC(100));
 }
 
 GDOpusEncoder::~GDOpusEncoder() {
@@ -28,6 +31,14 @@ GDOpusEncoder::~GDOpusEncoder() {
 
 void GDOpusEncoder::_ready() {
 	
+}
+
+void GDOpusEncoder::gdopus_set_forward_error_correction(bool enabled){
+	if(enabled == true){
+		opus_encoder_ctl(encoder, OPUS_SET_INBAND_FEC(1));
+	}else{
+		opus_encoder_ctl(encoder, OPUS_SET_INBAND_FEC(0));
+	}
 }
 
 void GDOpusEncoder::gdopus_set_bitrate(int bitrate){
