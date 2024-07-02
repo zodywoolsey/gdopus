@@ -22,7 +22,8 @@ public:
     void gdopus_set_bitrate(int bitrate);
     void gdopus_set_forward_error_correction(bool enabled);
     Dictionary gdopus_encode();
-	OpusEncoder* encoder;
+    Dictionary encode_buffer(PackedFloat32Array in_buffer, int max_packet_size_b);
+    OpusEncoder* encoder;
     unsigned char* output;
     void _process(double delta);
     void _ready();

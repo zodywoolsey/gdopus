@@ -45,7 +45,7 @@ func var_to_node(item:String='', dict:Dictionary={}):
 
 func normalize_float32_array(array:PackedFloat32Array):
 	# holder for normalized array
-	var norm_array :PackedFloat32Array = PackedFloat32Array(array)
+	var norm_array :PackedFloat32Array = array.duplicate()
 	# magnitude
 	var mag = 0.0
 	# create some vars for intermediate math

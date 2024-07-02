@@ -12,6 +12,7 @@ void GDOpusEncoder::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("gdopus_encode"), &GDOpusEncoder::gdopus_encode);
 	ClassDB::bind_method(D_METHOD("gdopus_set_bitrate"), &GDOpusEncoder::gdopus_set_bitrate);
 	ClassDB::bind_method(D_METHOD("gdopus_set_forward_error_correction"), &GDOpusEncoder::gdopus_set_forward_error_correction);
+	ClassDB::bind_method(D_METHOD("encode_buffer"), &GDOpusEncoder::encode_buffer);
 }
 
 GDOpusEncoder::GDOpusEncoder() {
@@ -43,6 +44,26 @@ void GDOpusEncoder::gdopus_set_forward_error_correction(bool enabled){
 
 void GDOpusEncoder::gdopus_set_bitrate(int bitrate){
 	opus_encoder_ctl(encoder, OPUS_SET_BITRATE(bitrate));
+}
+
+Dictionary GDOpusEncoder::encode_buffer(PackedFloat32Array in_buffer, int max_packet_size_b){
+  float* casted_in_buffer = new float[in_buffer.size()];
+  for (int i = 0; i < in_buffer.size(); i++){
+    casted_in_buffer[i] = in_buffer[i];
+  }
+  int err;
+  unsigned char* tmp_out = new unsigned char[max_packet_size_b];
+  opus_int32 encoded_bytes = opus_encode_float(encoder, casted_in_buffer, in_buffer.size()/2, tmp_out, max_packet_size_b);
+  PackedByteArray packed_output;
+  packed_output.resize(encoded_bytes);
+  
+  for (int i = 0; i < encoded_bytes; i++){
+    packed_output[i] = tmp_out[i];
+  }
+  Dictionary dict;
+  dict["encoded_bytes"] = encoded_bytes;
+  dict["output"] = packed_output;
+  return dict;
 }
 
 Dictionary GDOpusEncoder::gdopus_encode(){

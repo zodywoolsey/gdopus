@@ -12,7 +12,11 @@ env = SConscript("godot-cpp/SConstruct")
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
 
-env.Append(LIBPATH=["src/opus/build/"])
+if env["platform"] == "windows":
+    env.Append(LIBPATH=["src/opus/build-win/Release"])
+else:
+    env.Append(LIBPATH=["src/opus/build/"])
+
 env.Append(LIBS=["opus"])
 
 # left over from testing web builds, leaving in case useful in the future

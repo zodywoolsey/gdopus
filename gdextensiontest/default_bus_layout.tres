@@ -7,7 +7,6 @@ resource_name = "Amplify"
 resource_name = "GDOpusEncoder"
 
 [resource]
-bus/0/volume_db = -21.0931
 bus/1/name = &"sink"
 bus/1/solo = false
 bus/1/mute = true
