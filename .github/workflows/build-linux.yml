@@ -6,7 +6,7 @@ jobs:
   runMultipleCommands:
     runs-on: ubuntu-latest
     steps:
-     - run: git checkout https://github.com/zodywoolsey/gdopus --recurse-submodules
+     - run: git clone https://github.com/zodywoolsey/gdopus --recurse-submodules
      - run: ls src/opus
      - run: |
         cd src/opus
