@@ -14,4 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: cmake opus
-      run: cd src/opus; mkdir build; cd build; cmake ..; cmake --build .
+    - run: cd src/opus
+    - run: mkdir build
+    - run: cd build
+    - run: cmake ..
+    - run: cmake --build .
