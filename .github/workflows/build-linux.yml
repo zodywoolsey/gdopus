@@ -14,10 +14,10 @@ jobs:
          pip install scons
 
      - name: clone repository and submodules
-     - run: git clone https://github.com/zodywoolsey/gdopus --recurse-submodules
+       run: git clone https://github.com/zodywoolsey/gdopus --recurse-submodules
 
      - name: build opus static library with -fPIC
-     - run: |
+       run: |
         cd gdopus/src/opus
         mkdir build
         cd build
@@ -25,7 +25,7 @@ jobs:
         cmake --build .
 
      - name: compile extension with scons
-     - run: |
+       run: |
         cd ../../..
         scons
      - run: echo "finished"
