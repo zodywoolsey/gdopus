@@ -6,6 +6,13 @@ jobs:
   runMultipleCommands:
     runs-on: ubuntu-latest
     steps:
+     - name: Set up Python
+       uses: actions/setup-python@v3
+
+     - name: Install SCons
+       run: |
+         pip install scons
+
      - run: git clone https://github.com/zodywoolsey/gdopus --recurse-submodules
      - run: ls
      - run: |
