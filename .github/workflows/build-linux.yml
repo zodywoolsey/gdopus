@@ -26,6 +26,6 @@ jobs:
 
      - name: compile extension with scons
        run: |
-        cd ../../..
+        cd gdopus/
         scons
      - run: echo "finished"
