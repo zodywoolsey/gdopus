@@ -1,21 +1,20 @@
-name: C/C++ CI
+name: build-linux
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
-  build:
-
+  runMultipleCommands:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: cmake opus
-    - run: cd src/opus
-    - run: mkdir build
-    - run: cd build
-    - run: cmake ..
-    - run: cmake --build .
+     - uses: actions/checkout@v1
+     - run: |
+        cd src/opus
+        mkdir build
+        ls
+        cd build
+        ls
+        cmake ..
+        ls
+        cmake --build .
+        ls
+     - run: echo "finished"
