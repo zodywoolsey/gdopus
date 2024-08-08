@@ -23,6 +23,7 @@ env.Append(LIBS=["opus"])
 # env.Append(CXXDEFINES=["EMCC_FORCE_STDLIBS=1"])
 # env.Append(CPPDEFINES=["EMCC_FORCE_STDLIBS=1"])
 # env.Append(CXXFLAGS=['-fstack-protector'])
+# env.Append(CXXFLAGS=['-fPIC'])
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
