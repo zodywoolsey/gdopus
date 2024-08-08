@@ -14,4 +14,6 @@ jobs:
         cd build
         cmake ..
         cmake --build .
+        cd ../../..
+        scons
      - run: echo "finished"
