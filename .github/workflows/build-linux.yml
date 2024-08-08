@@ -8,13 +8,10 @@ jobs:
     steps:
      - uses: actions/checkout@v1
      - run: |
+        ls src/opus
         cd src/opus
         mkdir build
-        ls
         cd build
-        ls
         cmake ..
-        ls
         cmake --build .
-        ls
      - run: echo "finished"
