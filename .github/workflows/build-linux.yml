@@ -9,7 +9,7 @@ jobs:
      - run: git clone https://github.com/zodywoolsey/gdopus --recurse-submodules
      - run: ls
      - run: |
-        cd src/opus
+        cd gdopus/src/opus
         mkdir build
         cd build
         cmake ..
