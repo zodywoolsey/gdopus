@@ -28,4 +28,9 @@ jobs:
        run: |
         cd gdopus/
         scons
-     - run: echo "finished"
+     - uses: actions/upload-artifact@v4
+       with:
+         name: extension files
+         path: gdopus/gdextensiontest/bin/
+         overwrite: true
+     - run: echo "finished, artifacts should be named 'extension files'"
