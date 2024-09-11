@@ -18,7 +18,7 @@ if env["platform"] == "windows":
 elif env["platform"] == "android":
     env.Append(LIBPATH=["src/opus/build-android"])
 elif env["platform"] == "macos":
-    env.Append(LIBPATH=["src/opus/build-android"])
+    env.Append(LIBPATH=["src/opus/build-macos"])
 else:
     env.Append(LIBPATH=["src/opus/build/"])
 
